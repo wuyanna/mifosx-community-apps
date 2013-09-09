@@ -13,8 +13,8 @@
 <link rel="stylesheet" type="text/css"	href="resources/libs/DataTables-1.9.4/media/css/demo_table_jui.css" />
 <link rel="stylesheet" type="text/css"	href="resources/libs/jquery-ui-1.10.3.custom/css/smoothness/jquery-ui-1.10.3.custom.css" />
 <link rel="stylesheet" type="text/css"	href="resources/libs/jquery-ui-timepicker-addon.css" />
-<link rel="stylesheet" type="text/css"	href="resources/stretchyreporting/stretchyreporting-1.8.0.RELEASE.css">
-<link rel="stylesheet" type="text/css"	href="resources/IndividualLendingCode-1.8.0.RELEASE.css" />
+<link rel="stylesheet" type="text/css"	href="resources/stretchyreporting/stretchyreporting-1.9.0.RELEASE.css">
+<link rel="stylesheet" type="text/css"	href="resources/IndividualLendingCode-1.9.0.RELEASE.css" />
 <link rel="stylesheet" type="text/css"  href="resources/libs/jquery.multiselect.css" />
 <link rel="stylesheet" type="text/css"  href="resources/libs/jWizard/jquery.jWizard.css" />
 
@@ -85,16 +85,16 @@ JQuery plugins:
 <script type="text/javascript"	src="resources/libs/printThis.js"></script>
 
 <!-- JQuery plug-in to show Mifos X Platform additional data tables -->
-<script type="text/javascript" src="resources/stretchydatatables-1.8.0.RELEASE.js"></script>
+<script type="text/javascript" src="resources/stretchydatatables-1.9.0.RELEASE.js"></script>
 
 <!-- JQuery plug-in to show Mifos X Platform reporting -->
-<script type="text/javascript"	src="resources/stretchyreporting/stretchyreporting-1.8.0.RELEASE.js"></script>
+<script type="text/javascript"	src="resources/stretchyreporting/stretchyreporting-1.9.0.RELEASE.js"></script>
 
 <!-- JQuery plug-in to check if links and buttons should be shown in Mifos X UI -->
-<script type="text/javascript" src="resources/MifosXUI-1.8.0.RELEASE.js"></script>
+<script type="text/javascript" src="resources/MifosXUI-1.9.0.RELEASE.js"></script>
 
 <!-- JQuery plug-in to manage permissions and role permissions in the UI as the UI code is quite elaborate -->
-<script type="text/javascript" src="resources/MifosXPermissions-1.8.0.RELEASE.js"></script>
+<script type="text/javascript" src="resources/MifosXPermissions-1.9.0.RELEASE.js"></script>
 
 <!-- Google charts api (used in stretchyreporting) -->
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
@@ -103,8 +103,8 @@ JQuery plugins:
 </script>
 
 <!-- This is a single Page javascript app - IndividualLendingCode.js has functions which switch functionality by replacing the html in the #container div -->
-<script type="text/javascript" src="resources/IndividualLendingCode-1.8.0.RELEASE.js"></script>
-<script type="text/javascript" src="resources/SetTenantLoadTenantConfig-1.8.0.RELEASE.js"></script>
+<script type="text/javascript" src="resources/IndividualLendingCode-1.9.0.RELEASE.js"></script>
+<script type="text/javascript" src="resources/SetTenantLoadTenantConfig-1.9.0.RELEASE.js"></script>
 </head>
 
 <body>
@@ -1097,77 +1097,79 @@ $(document).ready(function() {
 </script>
 
 <script id="transferClientsBetweenGroupsFormTemplate" type="text/x-jquery-tmpl">
-<form id="entityform">
-	<div id="formerrors"></div>
-	<input type="hidden" id="locale" name="locale" value="{{=$ctx.currentLocale()}}" />
-	<table>
-		<tr>
-			<td class="paddingB10">
-				<div class="multiselectwidget">
-					<label for="notSelectedClients">{{=$ctx.doI18N("form.label.group.available.clients")}}</label>
-					<select id="notSelectedClients" name="notSelectedClients" title="" class="multiselectwidget multiNotSelectedItems" multiple="multiple" style="width:300px;height:125px;">
-					{{#each clientOptions}}
-						<option value="{{=id}}">{{=displayName}}, {{=officeName}}</option>
-					{{/each}}
-					</select>
-					<a href="#" id="addclientmembers" class="multiselectwidget multiadd">{{=$ctx.doI18N("widget.multiselect.button.add")}} &gt;&gt;</a>
-				</div>
-			</td>
-			<td class="paddingB10">
-				<div class="multiselectwidget">
-					<label for="clientMembers">{{=$ctx.doI18N("form.label.group.selected.clients")}}</label>
-					<select id="clientMembers" name="clientMembers" title="" class="multiselectwidget multiSelectedItems" multiple="multiple" style="width:300px;height:125px;">
-					{{#each clientMembers}}
-						{{#if officeName}}
+	<form id="entityform">
+		<div id="formerrors"></div>
+		<input type="hidden" id="locale" name="locale" value="{{=$ctx.currentLocale()}}" />
+		<table>
+			<tr>
+				<td class="paddingB10">
+					<div class="multiselectwidget">
+						<label for="notSelectedClients">{{=$ctx.doI18N("form.label.group.available.clients")}}</label>
+						<select id="notSelectedClients" name="notSelectedClients" title="" class="multiselectwidget multiNotSelectedItems" multiple="multiple" style="width:300px;height:125px;">
+						{{#each clientOptions}}
 							<option value="{{=id}}">{{=displayName}}, {{=officeName}}</option>
-						{{else}}
-							<option value="{{=id}}">{{=displayName}}, {{=$parent.parent.parent.data.officeName}}</option>
-						{{/if}}
-					{{/each}}
-					</select>
-					<a href="#" id="removeclientmembers" class="multiselectwidget multiremove">&lt;&lt; {{=$ctx.doI18N("widget.multiselect.button.remove")}}</a>  
-				</div>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				<label for="destinationGroupId">{{=$ctx.doI18N("label.select.destination.group")}}</label>
-			</td>
-			<td>
-				<select id="destinationGroupId" name="destinationGroupId" title="">
-					<option value="">{{=$ctx.doI18N("option.group.search.first.choice")}}</option>
-					{{#each groupOptions}}
-						<option value="{{=id}}">{{=name}}</option>
-					{{/each}}
-				</select>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				{{#if}}
-					<input id="transferActiveLoans" type="checkbox" name="transferActiveLoans" value="{{=transferActiveLoans}}" checked/>
-				{{#else}}
-					<input id="transferActiveLoans" type="checkbox" name="transferActiveLoans" value="{{=transferActiveLoans}}"/>
-				{{/if}}
-			</td>
-			<td>
-				<label for="transferActiveLoans">{{=$ctx.doI18N("label.transferActiveLoans")}}</label>
-			</td>
-		</tr>
-		<tr>
-			<td>
-				{{#if}}
-					<input id="inheritDefinationGroupLoanOfficer" type="checkbox" name="inheritDestinationGroupLoanOfficer" value="{{=inheritDefinationGroupLoanOfficer}}" checked/>
-				{{#else}}
-					<input id="inheritDefinationGroupLoanOfficer" type="checkbox" name="inheritDestinationGroupLoanOfficer" value="{{=inheritDefinationGroupLoanOfficer}}"/>
-				{{/if}}
-			</td>
-			<td>
-				<label for="inheritDefinationGroupLoanOfficer">{{=$ctx.doI18N("label.inheritDefinationGroupLoanOfficer")}}</label>
-			</td>
-		</tr>
-	</table>
-</form>
+						{{/each}}
+						</select>
+						<a href="#" id="addclientmembers" class="multiselectwidget multiadd">{{=$ctx.doI18N("widget.multiselect.button.add")}} &gt;&gt;</a>
+					</div>
+				</td>
+				<td class="paddingB10">
+					<div class="multiselectwidget">
+						<label for="clientMembers">{{=$ctx.doI18N("form.label.group.selected.clients")}}</label>
+						<select id="clientMembers" name="clientMembers" title="" class="multiselectwidget multiSelectedItems" multiple="multiple" style="width:300px;height:125px;">
+						{{#each clientMembers}}
+							{{#if officeName}}
+								<option value="{{=id}}">{{=displayName}}, {{=officeName}}</option>
+							{{else}}
+								<option value="{{=id}}">{{=displayName}}, {{=$parent.parent.parent.data.officeName}}</option>
+							{{/if}}
+						{{/each}}
+						</select>
+						<a href="#" id="removeclientmembers" class="multiselectwidget multiremove">&lt;&lt; {{=$ctx.doI18N("widget.multiselect.button.remove")}}</a>  
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<label for="inheritDestinationGroupLoanOfficer">{{=$ctx.doI18N("label.inheritDestinationGroupLoanOfficer")}}</label>
+				</td>
+				<td>
+					<input id="inheritDestinationGroupLoanOfficer" type="checkbox" name="inheritDestinationGroupLoanOfficer" value="{{=inheritDestinationGroupLoanOfficer}}" checked/>
+				</td>
+			</tr>
+			<tr>
+				<td><label for="smartGroupSearch">{{=$ctx.doI18N("label.group.smartsearch")}}</label>
+				</td>
+				<td><input id="smartGroupSearch" name="smartGroupSearch" title="" type="text" value=""/><small>{{=$ctx.doI18N("label.help.autocomplete")}}</small></td>
+			</tr>
+		</table>
+		<br/>
+		<fieldset>
+			<legend>{{=$ctx.doI18N("label.destinationGroupDetails")}}</legend>
+			<table>
+				<tr>
+					<td><label for="selectedGroupName">{{=$ctx.doI18N("label.group.name")}}</label></td>
+					<td><input readonly="true" id="selectedGroupName" name="selectedGroupName" title="" type="text" value=""/></td>
+				</tr>
+				<tr>
+					<td><label for="selectedGroupIdentifier">{{=$ctx.doI18N("label.groupIdentifier")}}</label></td>
+					<td><input readonly="true" id="selectedGroupIdentifier" name="selectedGroupIdentifier" title="" type="text" value=""/></td>
+				</tr>
+				<tr>	
+					<td><label for="selectedGroupExternalId">{{=$ctx.doI18N("label.group.externalid")}}</label></td>
+					<td><input readonly="true" id="selectedGroupExternalId" name="selectedGroupExternalId" title="" type="text" value=""/></td>
+				</tr>
+				<tr>	
+					<td><label for="selectedGroupActivationDate">{{=$ctx.doI18N("label.activationDate")}}</label></td>
+					<td><input readonly="true" id="selectedGroupActivationDate" name="selectedGroupActivationDate" title="" type="text" value=""/></td>
+				</tr>
+				<tr>	
+					<td><label for="selectedGroupStaffName">{{=$ctx.doI18N("label.group.staff")}}</label></td>
+					<td><input readonly="true" id="selectedGroupStaffName" name="selectedGroupStaffName" title="" type="text" value=""/></td>
+				</tr>
+			</table>
+		</fieldset>
+	</form>
 </script>
 
 <script id="centerFormTemplate" type="text/x-jquery-tmpl">
@@ -1479,6 +1481,9 @@ $(document).ready(function() {
 </script>
 
 <script id="groupDetailsTemplate" type="text/x-jquery-tmpl">
+{{#if status.value == 'Closed'}}
+
+{{#else}}
 <div class="breadcrumb">
 	<span class="rowvalue">{{=officeName}}</span> 
 	{{#if centerId}}>> <span><a href="#" onClick="showCenter({{=centerId}});">{{=centerName}}</a></span>{{/if}}
@@ -1508,7 +1513,7 @@ $(document).ready(function() {
          <button id="newgroupsavingsbtn{{=id}}" class="newgroupsavingsbtn">{{=$ctx.doI18N("label.group.new.saving.account")}}</button>
         {{/if}}
         {{#if $ctx.showTask("TransferClients")}}
-			<button id="transfferclientsbtn{{=id}}" class="transfferclientsbtn">{{=$ctx.doI18N("label.group.transffer.clients")}}</button>
+			<button id="transferclientsbtn{{=officeId}}" class="transferclientsbtn">{{=$ctx.doI18N("label.group.transfer.clients")}}</button>
         {{/if}}
 
 	{{#else}}
@@ -1537,7 +1542,9 @@ $(document).ready(function() {
         
         {{#if $ctx.showTask("AddGroupNote")}}
             <button id="addgroupnotebtn{{=id}}" class="addgroupnotebtn">Add note</button>
-    {{/if}}
+    	{{/if}}
+
+    	<button id="closeGroupbtn{{=id}}" class="closeGroupbtn">{{=$ctx.doI18N("label.group.close")}}</button>
     			</span>
 			</td>
 		</tr>
@@ -1546,6 +1553,7 @@ $(document).ready(function() {
 	<br/>
 	<br/>
 </div>
+{{/if}}
 </script>
 
 <script id="groupClientsTabTemplate" type="text/x-jquery-tmpl">
@@ -1809,22 +1817,26 @@ $(document).ready(function() {
                 </tbody>
             </table>
             <br>
-            <table width="100%" cellspacing="0" cellpadding="2" border="0" class="bluetableborder">
-                <tbody>
-                    <tr>
-                        <td class="bluetablehead05">
-                            <span class="fontnormalbold">{{=$ctx.doI18N("label.group.meeting.attendance.details")}}</span>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <div id="groupsAttendanceContent">
-                            	Attendance details.....
-                            </div>
-                        </td>
-                    </tr>                     
-                </tbody>
-            </table>
+            {{#if centerId}}
+
+            {{#else}}
+	            <table width="100%" cellspacing="0" cellpadding="2" border="0" class="bluetableborder">
+	                <tbody>
+	                    <tr>
+	                        <td class="bluetablehead05">
+	                            <span class="fontnormalbold">{{=$ctx.doI18N("label.group.meeting.attendance.details")}}</span>
+	                        </td>
+	                    </tr>
+	                    <tr>
+	                        <td>
+	                            <div id="groupsAttendanceContent">
+	                            	Attendance details.....
+	                            </div>
+	                        </td>
+	                    </tr>                     
+	                </tbody>
+	            </table>
+        	{{/if}}    
         </div>
         {{/if}}
     </div>
@@ -1937,6 +1949,33 @@ $(document).ready(function() {
 		{{/if}}
 	{{/if}}
 </script>
+
+<script id="groupCloseTemplate" type="text/x-jquery-tmpl">
+<form id="entityform">
+	<div id="formerrors"></div>
+	</div>
+	<table cellspacing="4px" cellpadding="8px">
+		<tr>
+			<td>
+				<input type="hidden" id="dateFormat" name="dateFormat" value="{{=$ctx.currentDateFormat()}}" />
+				<input type="hidden" id="locale" name="locale" value="{{=$ctx.currentLocale()}}" />
+				<label for="closureDate">{{=$ctx.doI18N("label.closureDate")}}</label>
+				<input id="closureDate" name="closureDate" title="" type="text" class="datepickerfield" value="{{=$ctx.globalDate(closureDate)}}"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="closureReasonId">{{=$ctx.doI18N("label.closure.reason")}}</label>
+				<select id="closureReasonId" name="closureReasonId" title="" >
+					{{#each closureReasons}}
+							<option value="{{=id}}">{{=$ctx.doI18N(name)}}</option>
+					{{/each}}
+				</select>
+			</td>
+		</tr>
+	</table>
+</form>
+</script> 
 
 <script id="memberLoanDetailsPartialTemplate" type="text/x-jquery-tmpl">
 	<div class="row">
@@ -2657,13 +2696,13 @@ $(document).ready(function() {
 		<table cellspacing="4px" cellpadding="8px">
 			<tr>
 				<td>
-					<input type="hidden" id="fromLoanOfficerId" name="fromLoanOfficerId" value="{{=fromLoanOfficerId}}" />
+					<input type="hidden" id="fromLoanOfficerId" name="fromLoanOfficerId" value="{{=loanOfficerId}}" />
 					<label for="toLoanOfficer">{{=$ctx.doI18N("form.label.loan.officer.to")}}</label>
 					<select id="toLoanOfficerId" name="toLoanOfficerId" title="">
 						<option value="">{{=$ctx.doI18N("option.loanOfficer.first.choice")}}</option>
 						{{#each loanOfficerOptions}}
-							{{#if $ctx.number($parent.parent.data.fromLoanOfficerId)===$ctx.number(id)}}
-								<option value="{{=id)}}" selected="selected">{{=displayName}}</option>
+							{{#if $ctx.number($parent.parent.data.loanOfficerId)===$ctx.number(id)}}
+
 							{{#else}}
 								<option value="{{=id)}}">{{=displayName}}</option>
 							{{/if}}
@@ -5064,6 +5103,7 @@ $(document).ready(function() {
 				{{#if $ctx.showTask("LOANREPAYMENT")}}
 				<button id="repaymentbtn{{=id}}" class="repaymentloan{{=id}}">{{=$ctx.doI18N("button.loan.repayment")}}</button>
 				{{/if}}
+
 				{{#if $ctx.showTask("WAIVEINTERESTPORTIONOFLOAN")}}
 				<button id="waiveinterestbtn{{=id}}" class="waiveinterestloan{{=id}}">{{=$ctx.doI18N("button.loan.waiveInterest")}}</button>
 				{{/if}}
@@ -5077,6 +5117,11 @@ $(document).ready(function() {
 				<button id="closebtn{{=id}}" class="closeloan{{=id}}">{{=$ctx.doI18N("button.loan.close")}}</button>
 				{{/if}}
 			{{/if}}
+
+			{{#if status.overpaid}}
+				<button id="loaaccountfundstransfer{{=id}}" class="loaaccountfundstransfer{{=id}}">{{=$ctx.doI18N("button.transferFunds")}}</button>
+			{{/if}}	
+
 			</span>
 		</td>
 	</table>
@@ -5693,6 +5738,7 @@ $(document).ready(function() {
 			<thead>
 				<tr>
 				<th>{{=$ctx.doI18N("table.heading.transaction.id")}}</th>
+				<th>{{=$ctx.doI18N("table.heading.transaction.office")}}</th>
 				<th>{{=$ctx.doI18N("table.heading.transactiondate")}}</th>
 				<th>{{=$ctx.doI18N("table.heading.transactionType")}}</th>
 				<th>{{=$ctx.doI18N("table.heading.amount")}}</th>
@@ -5704,6 +5750,7 @@ $(document).ready(function() {
 				{{#each transactions}}
 				<tr>
 				<td>{{=$ctx.number(id)}}</td>
+				<td>{{=$ctx.doI18N(officeName)}}</td>
 				<td>{{=$ctx.globalDate(date)}}</td>
 				<td>{{=$ctx.doI18N(type.code)}}</td>
 				<td>{{=$ctx.monetaryValue(currency, amount)}}</td>
@@ -6407,6 +6454,14 @@ $(document).ready(function() {
 					</td>
 				</tr>
 				<tr>
+					<td>{{=$ctx.doI18N("label.annualFee")}}</td>
+					<td>
+						<input id="annualFeeAmount" name="annualFeeAmount" title="" type="text" value="{{=$ctx.monetaryValue(currency, annualFeeAmount)}}" style="width: 75px;" />
+						{{=$ctx.doI18N("label.on")}}
+						<input id="annualFeeOnMonthDay" name="annualFeeOnMonthDay" title="" type="text" class="noyeardatepickerfield" value="{{=$ctx.monthDayDate(annualFeeOnMonthDay)}}" />
+					</td>
+				</tr>
+				<tr>
 					<td>{{=$ctx.doI18N("label.withdrawalFee")}}</td>
 					<td>
 						{{#if withdrawalFeeType}}
@@ -6446,15 +6501,17 @@ $(document).ready(function() {
 						{{/if}}
 					</td>
 				</tr>
-				<input type="hidden" id="monthDayFormat" name="monthDayFormat" value="dd MMM" />
-				<tr>
-					<td>{{=$ctx.doI18N("label.annualFee")}}</td>
-					<td>
-						<input id="annualFeeAmount" name="annualFeeAmount" title="" type="text" value="{{=$ctx.monetaryValue(currency, annualFeeAmount)}}" style="width: 75px;" />
-						{{=$ctx.doI18N("label.on")}}
-						<input id="annualFeeOnMonthDay" name="annualFeeOnMonthDay" title="" type="text" class="noyeardatepickerfield" value="{{=$ctx.monthDayDate(annualFeeOnMonthDay)}}" />
-					</td>
 				</tr>
+					<td>
+						{{#if withdrawalFeeForTransfers}}
+							<input type="checkbox" name="withdrawalFeeForTransfers" id="withdrawalFeeForTransfers" value="{{=withdrawalFeeForTransfers}}" checked />
+						{{#else}}
+							<input type="checkbox" name="withdrawalFeeForTransfers" id="withdrawalFeeForTransfers" value="{{=withdrawalFeeForTransfers}}" />
+						{{/if}}
+						{{=$ctx.doI18N("label.withdrawalFee.transfer")}}
+				</td>
+				</tr>
+				<input type="hidden" id="monthDayFormat" name="monthDayFormat" value="dd MMM" />
 			</table>
 		</div>
 
@@ -6652,6 +6709,29 @@ $(document).ready(function() {
 				<input type="hidden" id="locale" name="locale" value="{{=$ctx.currentLocale()}}" />
 				<label for="activatedOnDate">{{=$ctx.doI18N("label.activationDate")}}</label>
 				<input id="activatedOnDate" name="activatedOnDate" title="" type="text" class="datepickerfield" value="{{=$ctx.globalDate(activatedOnDate)}}"/>
+			</td>
+		</tr>
+	</table>
+</form>
+</script>
+
+<script id="savingsAccountCloseTemplate" type="text/x-jquery-tmpl">
+<form id="entityform">
+	<div id="formerrors"></div>
+	</div>
+	<table cellspacing="4px" cellpadding="8px">
+		<tr>
+			<td>
+				<input type="hidden" id="dateFormat" name="dateFormat" value="{{=$ctx.currentDateFormat()}}" />
+				<input type="hidden" id="locale" name="locale" value="{{=$ctx.currentLocale()}}" />
+				<label for="closedOnDate">{{=$ctx.doI18N("form.label.closeDate")}}</label>
+				<input id="closedOnDate" name="closedOnDate" title="" type="text" class="datepickerfield" value="{{=$ctx.globalDate(closedOnDate)}}"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<label for="note">{{=$ctx.doI18N("label.note")}}</label>
+				<textarea rows="3" cols="53" id="note" name="note"></textarea>
 			</td>
 		</tr>
 	</table>
@@ -6903,6 +6983,14 @@ $(document).ready(function() {
 					</td>
 				</tr>
 				<tr>
+					<td>{{=$ctx.doI18N("label.annualFee")}}</td>
+					<td>
+						<input id="annualFeeAmount" name="annualFeeAmount" title="" type="text" value="{{=$ctx.monetaryValue(currency, annualFeeAmount)}}" style="width: 75px;" />
+						{{=$ctx.doI18N("label.on")}}
+						<input id="annualFeeOnMonthDay" name="annualFeeOnMonthDay" title="" type="text" class="noyeardatepickerfield" value="{{=$ctx.monthDayDate(annualFeeOnMonthDay)}}" />
+					</td>
+				</tr>
+				<tr>
 					<td>{{=$ctx.doI18N("label.withdrawalFee")}}</td>
 					<td>
 						{{#if withdrawalFeeType}}
@@ -6942,15 +7030,17 @@ $(document).ready(function() {
 						{{/if}}
 					</td>
 				</tr>
-				<input type="hidden" id="monthDayFormat" name="monthDayFormat" value="dd MMM" />
-				<tr>
-					<td>{{=$ctx.doI18N("label.annualFee")}}</td>
-					<td>
-						<input id="annualFeeAmount" name="annualFeeAmount" title="" type="text" value="{{=$ctx.monetaryValue(currency, annualFeeAmount)}}" style="width: 75px;" />
-						{{=$ctx.doI18N("label.on")}}
-						<input id="annualFeeOnMonthDay" name="annualFeeOnMonthDay" title="" type="text" class="noyeardatepickerfield" value="{{=$ctx.monthDayDate(annualFeeOnMonthDay)}}" />
-					</td>
 				</tr>
+					<td >
+						{{#if withdrawalFeeForTransfers}}
+							<input type="checkbox" name="withdrawalFeeForTransfers" id="withdrawalFeeForTransfers" value="{{=withdrawalFeeForTransfers}}" checked />
+						{{#else}}
+							<input type="checkbox" name="withdrawalFeeForTransfers" id="withdrawalFeeForTransfers" value="{{=withdrawalFeeForTransfers}}" />
+						{{/if}}
+					{{=$ctx.doI18N("label.withdrawalFee.transfer")}}
+				</td>
+				</tr>
+				<input type="hidden" id="monthDayFormat" name="monthDayFormat" value="dd MMM" />
 			</table>
 		</div>
 	</div>
@@ -6987,6 +7077,9 @@ $(document).ready(function() {
 
 				{{#if $ctx.showTask("APPLYANNUALFEESAVINGSACCOUNT")}}
 				<button id="savingsaccountfundstransferbtn{{=id}}" class="savingsaccountfundstransfer{{=id}}">{{=$ctx.doI18N("button.transferFunds")}}</button>
+				{{/if}}
+				{{#if $ctx.showTask("CLOSE_SAVINGSACCOUNT")}}
+				<button id="savingsaccountclosebtn{{=id}}" class="savingsaccountclose{{=id}}">{{=$ctx.doI18N("CLOSE")}}</button>
 				{{/if}}
 			{{/if}}
 
@@ -7187,11 +7280,10 @@ $(document).ready(function() {
 			<td>&nbsp;</td>
 			{{/if}}
 			<td>{{=$ctx.monetaryValue(currency, runningBalance)}}</td>
-
 			{{#if transfer}}
 				<td>&nbsp;</td>
 			{{#else}}
-				{{#if reversed}}
+				{{#if reversed or $parent.parent.parent.data.status.closed}}
 					<td>&nbsp;</td>
 				{{#else}}
 					<td>
@@ -7273,7 +7365,7 @@ $(document).ready(function() {
 
     <input type="hidden" id="fromOfficeIdHidden" name="fromOfficeId" value="{{=$ctx.number(fromOffice.id)}}" />
 	<input type="hidden" id="fromClientIdHidden" name="fromClientId" value="{{=$ctx.number(fromClient.id)}}" />
-	<input type="hidden" id="fromAccountTypeHidden" name="fromAccountType" value="2" />
+	<input type="hidden" id="fromAccountTypeHidden" name="fromAccountType" value="{{=$ctx.number(fromAccountType.id)}}" />
 	<input type="hidden" id="fromAccountIdHidden" name="fromAccountId" value="{{=$ctx.number(fromAccount.id)}}" />
 
 	<table>
@@ -7316,7 +7408,7 @@ $(document).ready(function() {
 						<select id="fromAccountType" name="fromAccountType" title="" disabled=disabled>
 							<option value="">{{=$ctx.doI18N("form.option.select.one")}}</option>
 							{{#each fromAccountTypeOptions}}
-								{{#if $ctx.number(id)===$ctx.number(2)}}
+								{{#if $ctx.number(id)===$ctx.number($parent.parent.data.fromAccountType.id)}}
 									<option value="{{=id}}" selected="selected">{{=$ctx.doI18N(code)}}</option>
 								{{#else}}
 									<option value="{{=id}}">{{=$ctx.doI18N(code)}}</option>
@@ -7968,6 +8060,26 @@ $(document).ready(function() {
 									{{#each accountingMappingOptions.assetAccountOptions}}
 										 {{#if $parent.parent.data.accountingMappings}}
 											{{#if $parent.parent.parent.data.accountingMappings.loanPortfolioAccountId === id)}}
+													<option value="{{=id}}" selected="true">{{=name}}({{=glCode}})</option>
+											{{#else}}
+													<option value="{{=id}}">{{=name}}({{=glCode}})</option>
+											{{/if}}
+										{{#else}}
+											 <option value="{{=id}}">{{=name}}({{=glCode}})</option>
+										{{/if}}
+									{{/each}}
+								</select>  
+							</td>
+						</tr>
+						<tr>
+							<td>{{=$ctx.doI18N("label.transfersInSuspense")}}</td>
+							<td>
+								<img src="resources/img/help.png" height="16" width="16" id="accTooltip" title="{{=$ctx.doI18N(\"transfersInSuspenseTooltip\")}}">
+								<select id="transfersInSuspenseAccountId" name="transfersInSuspenseAccountId" title="" >
+									<option value="">{{=$ctx.doI18N("option.glAccount.first.choice")}}</option>
+									{{#each accountingMappingOptions.assetAccountOptions}}
+										 {{#if $parent.parent.data.accountingMappings}}
+											{{#if $parent.parent.parent.data.accountingMappings.transfersInSuspenseAccountId === id)}}
 													<option value="{{=id}}" selected="true">{{=name}}({{=glCode}})</option>
 											{{#else}}
 													<option value="{{=id}}">{{=name}}({{=glCode}})</option>
@@ -9118,6 +9230,90 @@ $(document).ready(function() {
 </form>
 </script>
 
+
+<script id="proposeClientTransferFormTemplate" type="text/x-jquery-tmpl">
+<form id="entityform">
+	<div id="formerrors"></div>
+	<input type="hidden" id="dateFormat" name="dateFormat" value="{{=$ctx.currentDateFormat()}}" />
+	<input type="hidden" id="locale" name="locale" value="{{=$ctx.currentLocale()}}" />
+
+	<label for="destinationOfficeId">{{=$ctx.doI18N("label.office")}}</label>
+	<select id="destinationOfficeId" name="destinationOfficeId" title="" >
+		<option value="">{{=$ctx.doI18N("option.office.first.choice")}}</option>
+		{{#each officeOptions}}
+			{{#if $ctx.number($parent.parent.data.clientOfficeId)!=$ctx.number(id)}}
+				{{#if $ctx.number($parent.parent.parent.data.officeId)==$ctx.number(id)}}
+					<option value="{{=id}}" selected="selected">{{=name}}</option>
+				{{#else}}
+					<option value="{{=id}}">{{=name}}</option>
+				{{/if}}
+			{{/if}}
+		{{/each}}
+	</select>
+	<label for="note">{{=$ctx.doI18N("label.note")}}</label>
+	<textarea rows="5" cols="50" id="note" name="note" cssClass="text ui-widget-content ui-corner-all">{{=note}}</textarea>
+</form>
+</script>
+
+<script id="acceptClientTransferFormTemplate" type="text/x-jquery-tmpl">
+<form id="entityform">
+	<div id="formerrors"></div>
+	
+	<label for="staffId">{{=$ctx.doI18N("label.client.staff")}}</label>
+	<select id="staffId" name="staffId" title="" >
+		<option value="">{{=$ctx.doI18N("option.client.select.staff.first.choice")}}</option>
+		{{#each staffOptions}}
+			<option value="{{=id}}">{{=displayName}}</option>
+		{{/each}}
+	</select>
+	
+	
+	<label for="smartGroupSearch"><b>{{=$ctx.doI18N("label.group.smartsearch")}}</b></label>
+	<span>
+		<input id="smartGroupSearch" name="smartGroupSearch" title="" type="text" value=""/>
+		<small>{{=$ctx.doI18N("label.help.autocomplete")}}</small>
+	</span>
+	
+
+	<label for="note">{{=$ctx.doI18N("label.note")}}</label>
+	<textarea rows="5" cols="50" id="note" name="note" cssClass="text ui-widget-content ui-corner-all">{{=note}}</textarea>
+
+	<fieldset>
+		<legend>{{=$ctx.doI18N("label.destinationGroupDetails")}}</legend>
+		<table>
+			<tr>
+				<td><label for="selectedGroupName">{{=$ctx.doI18N("label.group.name")}}</label></td>
+				<td><input readonly="true" id="selectedGroupName" name="selectedGroupName" title="" type="text" value=""/></td>
+			</tr>
+			<tr>
+				<td><label for="selectedGroupIdentifier">{{=$ctx.doI18N("label.groupIdentifier")}}</label></td>
+				<td><input readonly="true" id="selectedGroupIdentifier" name="selectedGroupIdentifier" title="" type="text" value=""/></td>
+			</tr>
+			<tr>	
+				<td><label for="selectedGroupExternalId">{{=$ctx.doI18N("label.group.externalid")}}</label></td>
+				<td><input readonly="true" id="selectedGroupExternalId" name="selectedGroupExternalId" title="" type="text" value=""/></td>
+			</tr>
+			<tr>	
+				<td><label for="selectedGroupActivationDate">{{=$ctx.doI18N("label.activationDate")}}</label></td>
+				<td><input readonly="true" id="selectedGroupActivationDate" name="selectedGroupActivationDate" title="" type="text" value=""/></td>
+			</tr>
+			<tr>	
+				<td><label for="selectedGroupStaffName">{{=$ctx.doI18N("label.group.staff")}}</label></td>
+				<td><input readonly="true" id="selectedGroupStaffName" name="selectedGroupStaffName" title="" type="text" value=""/></td>
+			</tr>
+		</table>
+	</fieldset>
+</form>
+</script>
+
+<script id="rejectClientTransferFormTemplate" type="text/x-jquery-tmpl">
+<form id="entityform">
+	<div id="formerrors"></div>
+	<label for="note">{{=$ctx.doI18N("label.note")}}</label>
+	<textarea rows="5" cols="50" id="note" name="note" cssClass="text ui-widget-content ui-corner-all">{{=note}}</textarea>
+</form>
+</script>
+
 <script id="clientToolbarTemplate" type="text/x-jquery-tmpl">
 <div style="padding-bottom: 4px;">
 <table style="width:100%">
@@ -9132,6 +9328,8 @@ $(document).ready(function() {
 
 		{{#if activationDate}}
 		
+		
+
 		{{#else}}
 			{{#if $ctx.showTask("ActivateClient")}}
 				<button id="activateclientbtn" class="activateclient">Activate</button>
@@ -9157,6 +9355,18 @@ $(document).ready(function() {
 
 			{{#if $ctx.showTask("AddSavingAccount")}}
 				<button id="newsavingbtn" class="newsavingbtn">New savings account</button>
+			{{/if}}
+
+			{{#if $ctx.showTask("TransferClients")}}
+				{{#if status.code === "clientStatusType.transfer.in.progress"}}
+					<button id="acceptClientTransferbtn{{=officeId}}" class="acceptClientTransferbtn">{{=$ctx.doI18N("label.clients.accept.transfer")}}</button>
+					<button id="rejectClientTransferbtn{{=officeId}}" class="rejectClientTransferbtn">{{=$ctx.doI18N("label.clients.reject.transfer")}}</button>
+					<button id="withdrawClientTransferbtn{{=officeId}}" class="withdrawClientTransferbtn">{{=$ctx.doI18N("label.clients.withdraw.transfer")}}</button>
+				{{#else if status.code === "clientStatusType.transfer.on.hold"}}
+					<button id="withdrawClientTransferbtn{{=officeId}}" class="withdrawClientTransferbtn">{{=$ctx.doI18N("label.clients.withdraw.transfer")}}</button>
+				{{#else}}
+					<button id="transferclientsbtn{{=officeId}}" class="transferclientsbtn">{{=$ctx.doI18N("label.clients.transfer")}}</button>
+				{{/if}}
 			{{/if}}
 		{{/if}}
 		{{#if $ctx.showTask("ClientClose")}}
@@ -9516,7 +9726,11 @@ $(document).ready(function() {
 			<tr>
 				<td>
 					<label for="repeat" style="display: inline">{{=$ctx.doI18N("label.calendar.repeat")}}</label>
-					<input type="checkbox" id="repeating" name="repeating" title="" />
+					{{#if repeating}}
+					<input type="checkbox" id="repeating" name="repeating" title="" checked/>
+					{{#else}}
+					<input type="checkbox" id="repeating" name="repeating" title=""/>
+					{{/if}}
 				</td>                
 				<td>
 				
@@ -9681,27 +9895,19 @@ $(document).ready(function() {
 								</select>
 							</td>
 						</tr>
+
 						<tr>
 							<td>
-								<label for="calendar">{{=$ctx.doI18N("label.collection.sheet.meeting")}}</label>
+								<label for="transactionDate">{{=$ctx.doI18N("label.collection.sheet.date.of.transaction")}}</label>
 							</td>
 							<td>
-								<select id="calendarId" name="calendarId">
-									<option value=0>{{=$ctx.doI18N("collection.sheet.meeting.first.choice")}}</option>
-								</select>
-							</td>
-						</tr>
-						<tr>
-							<td>
-								<label for="dueDate">{{=$ctx.doI18N("label.collection.sheet.date.of.transaction")}}</label>
-							</td>
-							<td>
-								<input id="dueDate" name="dueDate" title="" type="text" class="datepickerfieldnoconstraint" value="" required/>
+								<input id="transactionDate" name="transactionDate" title="" type="text" class="datepickerfieldnoconstraint" value=""/>
 							</td>
 						</tr>
 					</table>
 				</fieldset>
 				</div>
+				<input type="hidden" id="calendarId" name="calendarId" value="0">
 			</form>
 		</div>
 
@@ -9712,7 +9918,7 @@ $(document).ready(function() {
 </script>
 
 <script id="collectionSheetTemplate" type="text/x-jquery-tmpl">
-	<form id="entityform">
+	<form id="collectionSheetEntityform">
 		<input type="hidden" id="dateFormat" name="dateFormat" value="dd MMMM yyyy" />
 		<input type="hidden" id="locale" name="locale" value="{{=$ctx.currentLocale()}}" />
 		<div id="formerrors"></div>
@@ -9723,6 +9929,7 @@ $(document).ready(function() {
 						<th class="empty" scope="colgroup"> </th>
 						<th class="highlightcol" scope="colgroup" colspan="{{=crudRows.loanProducts.length}}">{{=$ctx.doI18N("label.collection.sheet.due.collections")}}</th>
 						<th class="highlightcol" scope="colgroup" colspan="{{=crudRows.loanProducts.length}}">{{=$ctx.doI18N("label.collection.sheet.issues.withdrawls")}}</th>
+						<th class="empty" scope="colgroup"> </th>
 					</tr>
 					<tr>
 						<th>{{=$ctx.doI18N("label.collection.sheet.borrower.name")}}</th>
@@ -9749,6 +9956,7 @@ $(document).ready(function() {
 
 							</th>
 						{{/each}}
+						<th class="lefthighlightcolheader">{{=$ctx.doI18N("label.collection.sheet.attendance")}}</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -9760,6 +9968,7 @@ $(document).ready(function() {
 						</td>
 						<td class="lefthighlightcolheader cellalignright" scope="colgroup" colspan="{{=$parent.parent.data.loanProducts.length}}">&nbsp;</td>
 						<td class="righthighlightcolheader" scope="colgroup" colspan="{{=$parent.parent.data.loanProducts.length}}">&nbsp;</td>
+						<td colspan="1" scope="colgroup">&nbsp;</td>
 					</tr>
 						{{#each clients}}
 							<tr>
@@ -9792,6 +10001,25 @@ $(document).ready(function() {
 										{{/each}}
 									</td>
 								{{/each}}
+								<td class="lefthighlightcolheader">
+									
+									<input id="clientsAttendance[{{=$itemNumber}}][clientId]" name="clientsAttendance[{{=$itemNumber}}][clientId]" title="" type="hidden" value="{{=clientId}}" size="30"/>
+
+									<select id="clientsAttendance[{{=$itemNumber}}][attendanceType]" name="clientsAttendance[{{=$itemNumber}}][attendanceType]" title="" value="{{=$ctx.number(attendanceType.id)}}">
+										{{#each $parent.parent.parent.parent.data.attendanceTypeOptions}}
+											{{#if $parent.parent.data.attendanceType.id === id}}
+												<option selected=selected value="{{=$ctx.number(id)}}">
+													{{=value}}
+												</option>
+											{{#else}}
+												<option value="{{=$ctx.number(id)}}">
+													{{=value}}
+												</option>
+											{{/if}}								
+											
+										{{/each}}
+									</select>
+								</td>
 							</tr>
 						{{/each}}
 
@@ -10299,7 +10527,8 @@ $(document).ready(function() {
 				</td>
 				<td valign="top" style="text-align: right">
 					<span id="toolbar" class="ui-widget-header ui-corner-all">
-
+						{{#if status.value == 'Closed'}}
+						{{#else}}
 						{{#if activationDate}}
 							{{#if $ctx.showTask("EditCenter")}}
 								<button id="editcenterbtn{{=id}}" class="editcenterbtn">Edit center</button>
@@ -10338,6 +10567,8 @@ $(document).ready(function() {
 	                        {{#if $ctx.showTask("AddGroupNote")}}
     	                    <button id="addgroupnotebtn{{=id}}" class="addgroupnotebtn">Add note</button>
         	                {{/if}}
+						{{/if}}
+						<button id="centerClosebtn{{=id}}" class="centerClosebtn">{{=$ctx.doI18N("label.group.close")}}</button>
 						{{/if}}
 					</span>
 				</td>
@@ -10615,8 +10846,10 @@ $(document).ready(function() {
                     {{/each}}
                 </td>
                 <td>
-                    {{#if debitAccountHead}}
-                        {{=debitAccountHead.name}}({{=debitAccountHead.glCode}})
+                	{{#if debitAccounts}}
+                    {{#each debitAccounts}}
+                        {{=name}}({{=glCode}})
+                    {{/each}}
                     {{/if}}
                 </td>
                 <td>
@@ -10627,8 +10860,10 @@ $(document).ready(function() {
                     {{/each}}
                 </td>
                 <td>
-                    {{#if creditAccountHead}}
-                        {{=creditAccountHead.name}}({{=creditAccountHead.glCode}})
+                	{{#if creditAccounts}}
+                    {{#each creditAccounts}}
+                        {{=name}}({{=glCode}})
+                    {{/each}}
                     {{/if}}
                 </td>
                 <td>
@@ -10937,18 +11172,6 @@ $(document).ready(function() {
                 {{/each}}
             </select></td>
         </tr>
-        <tr>
-            <td>
-                <div id="amountLabel">
-                    <label for="amount">{{=$ctx.doI18N("label.amount")}}</label>
-                </div>
-            </td>
-            <td>
-                <div id="amountDiv">
-                    <input id="amount" name="amount" title="" type="text" value="{{=amount}}" />
-                </div>
-            </td>
-        </tr> 
         <tr>
             <td><label for="referenceNumber">{{=$ctx.doI18N("label.referenceNumber")}}</label></td>
             <td>
